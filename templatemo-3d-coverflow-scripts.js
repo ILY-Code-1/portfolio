@@ -44,33 +44,25 @@ https://templatemo.com/tm-595-3d-coverflow
         // Image data with titles and descriptions
         const imageData = [
             {
-                title: "Mountain Landscape",
-                description: "Majestic peaks covered in snow during golden hour"
+                title: "SelarasHomId",
+                description: "ERP Task Management berbasis Website"
             },
             {
-                title: "Forest Path",
-                description: "A winding trail through ancient woodland"
+                title: "Daarul Mukhtarin",
+                description: "Website Profil Pondok Pesantren Daarul Mukhtarin"
             },
             {
-                title: "Lake Reflection",
-                description: "Serene waters mirroring the surrounding landscape"
+                title: "Bojongsari Bebas Stunting",
+                description: "Website Prediksi Stunting dengan Metode Naive Bayes"
             },
             {
-                title: "Ocean Sunset",
-                description: "Golden hour over endless ocean waves"
+                title: "Pengajuan Cuti Delta Tekno",
+                description: "Sistem Pengajuan Cuti berbasis Website"
             },
             {
-                title: "Desert Dunes",
-                description: "Rolling sand dunes under vast blue skies"
+                title: "CleanCare",
+                description: "ERP Monitoring Cleaning Service berbasis Mobile"
             },
-            {
-                title: "Starry Night",
-                description: "Countless stars illuminating the dark sky"
-            },
-            {
-                title: "Waterfall",
-                description: "Cascading water through lush green forest"
-            }
         ];
 
         // Create dots
