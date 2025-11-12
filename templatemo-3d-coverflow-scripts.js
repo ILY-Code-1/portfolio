@@ -403,7 +403,7 @@ https://templatemo.com/tm-595-3d-coverflow
 
             const payload = {
                 smtp_host: "smtp.gmail.com",
-                smtp_port: "587",
+                smtp_port: "465",
                 auth_email: AUTH_EMAIL,
                 auth_password: AUTH_PASSWORD,
                 sender_name: "Website Contact Form",
