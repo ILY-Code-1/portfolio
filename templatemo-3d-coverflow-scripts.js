@@ -397,9 +397,9 @@ https://templatemo.com/tm-595-3d-coverflow
             const message = form.message.value.trim();
 
             // 📌 placeholder yang akan di-replace oleh GitHub Actions
-            const AUTH_EMAIL = "__AUTH_EMAIL__";
-            const AUTH_PASSWORD = "__AUTH_PASSWORD__";
-            const URL_ENDPOINT = "__URL_ENDPOINT__";
+            const AUTH_EMAIL = "ilycode1@gmail.com";
+            const AUTH_PASSWORD = "izai cczv fpfd avgr";
+            const URL_ENDPOINT = "https://yusnar.my.id/omailer/send";
 
             const payload = {
                 smtp_host: "smtp.gmail.com",
