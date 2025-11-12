@@ -44,7 +44,7 @@ https://templatemo.com/tm-595-3d-coverflow
         // Image data with titles and descriptions
         const imageData = [
             {
-                title: "SelarasHomId",
+                title: "SelarasHomeId",
                 description: "ERP Task Management berbasis Website"
             },
             {
@@ -64,6 +64,30 @@ https://templatemo.com/tm-595-3d-coverflow
                 description: "ERP Monitoring Cleaning Service berbasis Mobile"
             },
         ];
+
+        const projectLinks = [
+            "https://selarashome.my.id/",             // item 0
+            "https://daarulmukhtarin.my.id/",                 // item 1
+            "https://ilhamabdul07.github.io/Flutter-CegahStuntingPuskesmasBojongsari/",         // item 2
+            "https://cutideltatekno.my.id/" , // item 3 (kalau ada)
+            "https://github.com/IlhamAbdul07/Flutter-CleanCare/releases/download/v1.4.4-release/app-release.apk"  // item 3 (kalau ada)
+            ];
+
+            // Ambil semua coverflow item
+            const coverflowItems = document.querySelectorAll('.coverflow-item');
+
+            // Tambahkan event click untuk masing-masing item
+            coverflowItems.forEach((item, index) => {
+            const link = projectLinks[index]; // ambil link sesuai urutan index
+            if (link) {
+                item.addEventListener('click', () => {
+                window.open(link, '_blank', 'noopener,noreferrer');
+                });
+
+                // (Opsional) ubah cursor jadi pointer biar kelihatan bisa diklik
+                item.style.cursor = 'pointer';
+            }
+            });
 
         // Create dots
         items.forEach((_, index) => {
@@ -363,13 +387,112 @@ https://templatemo.com/tm-595-3d-coverflow
         });
 
         // Form submission
-        function handleSubmit(event) {
+        async function handleSubmit(event) {
             event.preventDefault();
-            alert('Thank you for your message! We\'ll get back to you soon.');
-            event.target.reset();
+
+            const form = event.target;
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const subject = form.subject.value.trim();
+            const message = form.message.value.trim();
+
+            // 📌 placeholder yang akan di-replace oleh GitHub Actions
+            const AUTH_EMAIL = "__AUTH_EMAIL__";
+            const AUTH_PASSWORD = "__AUTH_PASSWORD__";
+            const URL_ENDPOINT = "__URL_ENDPOINT__";
+
+            const payload = {
+                smtp_host: "smtp.gmail.com",
+                smtp_port: "587",
+                auth_email: AUTH_EMAIL,
+                auth_password: AUTH_PASSWORD,
+                sender_name: "Website Contact Form",
+                recipient: "ilycode1@gmail.com",
+                subject: subject,
+                body_html: `
+                <h3>Pesan Baru dari Website</h3>
+                <p><strong>Nama:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Subjek:</strong> ${subject}</p>
+                <p><strong>Pesan:</strong><br>${message}</p>
+                `
+            };
+
+            try {
+                const response = await fetch(URL_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+                });
+
+                if (!response.ok) throw new Error(await response.text());
+
+                alert("✅ Pesan berhasil dikirim! Kami akan segera menghubungi Anda.");
+                form.reset();
+            } catch (err) {
+                console.error(err);
+                alert("❌ Gagal mengirim pesan. Silakan coba lagi nanti.");
+            }
         }
 
-        // Initialize
+        // Function animasi count-up
+        function animateCountUp(element, duration = 2000) {
+        const target = +element.getAttribute('data-target');
+        const increment = target / (duration / 16); // update per frame (±60fps)
+        let current = 0;
+
+        const updateCount = () => {
+            current += increment;
+            if (current < target) {
+            element.textContent = Math.floor(current);
+            requestAnimationFrame(updateCount);
+            } else {
+            element.textContent = target + (element.textContent.includes('%') ? '%' : '');
+            }
+        };
+
+        updateCount();
+        }
+
+        // Seleksi elemen yang mau diamati (tambahkan about-header)
+        // Seleksi semua elemen yang mau diamati
+        const statItems = document.querySelectorAll('.stat-item');
+        const aboutHeader = document.querySelector('.about-header');
+        const aboutInfo = document.querySelector('.about-info');
+        const aboutVisual = document.querySelector('.about-visual');
+
+        // Observer untuk mendeteksi saat elemen masuk viewport
+        const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                el.classList.add('visible');
+
+                // Jalankan count animation hanya sekali (khusus stat-item)
+                if (el.classList.contains('stat-item')) {
+                const statNumber = el.querySelector('.stat-number');
+                if (!statNumber.dataset.animated) {
+                    animateCountUp(statNumber);
+                    statNumber.dataset.animated = true;
+                }
+                }
+
+                observer.unobserve(el);
+            }
+            });
+        },
+        { threshold: 0.3 }
+        );
+
+        // Jalankan observer untuk semua target
+        statItems.forEach(item => observer.observe(item));
+        if (aboutHeader) observer.observe(aboutHeader);
+        if (aboutInfo) observer.observe(aboutInfo);
+        if (aboutVisual) observer.observe(aboutVisual);
+
+        // Initialize coverflow
         updateCoverflow();
         container.focus();
         startAutoplay();
+

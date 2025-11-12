@@ -388,6 +388,14 @@ https://templatemo.com/tm-595-3d-coverflow
         .about-header {
             text-align: center;
             margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .about-header.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .about-header h2 {
@@ -422,6 +430,28 @@ https://templatemo.com/tm-595-3d-coverflow
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .about-info,
+        .about-visual {
+            opacity: 0;
+            transition: all 0.9s ease-out;
+        }
+
+        /* Arah awal */
+        .about-info {
+            transform: translateX(60px);
+        }
+
+        .about-visual {
+            transform: translateX(-60px);
+        }
+
+        /* Saat masuk viewport */
+        .about-info.visible,
+        .about-visual.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .showcase-display {
@@ -625,6 +655,14 @@ https://templatemo.com/tm-595-3d-coverflow
 
         .stat-item {
             text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .stat-number {
