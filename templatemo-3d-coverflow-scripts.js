@@ -397,15 +397,15 @@ https://templatemo.com/tm-595-3d-coverflow
             const message = form.message.value.trim();
 
             // 📌 placeholder yang akan di-replace oleh GitHub Actions
-            const AUTH_EMAIL = "__AUTH_EMAIL__";
-            const AUTH_PASSWORD = "__AUTH_PASSWORD__";
-            const URL_ENDPOINT = "__URL_ENDPOINT__";
+            // const AUTH_EMAIL = "__AUTH_EMAIL__";
+            // const AUTH_PASSWORD = "__AUTH_PASSWORD__";
+            // const URL_ENDPOINT = "__URL_ENDPOINT__";
 
             const payload = {
                 smtp_host: "smtp.gmail.com",
                 smtp_port: "587",
-                auth_email: AUTH_EMAIL,
-                auth_password: AUTH_PASSWORD,
+                auth_email: "ilycode1@gmail.com",
+                auth_password: "izai cczv fpfd avgr",
                 sender_name: "Website Contact Form",
                 recipient: "ilycode1@gmail.com",
                 subject: subject,
@@ -419,7 +419,7 @@ https://templatemo.com/tm-595-3d-coverflow
             };
 
             try {
-                const response = await fetch(URL_ENDPOINT, {
+                const response = await fetch("https://yusnar.my.id/omailer/send", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
