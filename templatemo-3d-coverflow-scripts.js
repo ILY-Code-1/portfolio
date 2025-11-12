@@ -421,7 +421,7 @@ https://templatemo.com/tm-595-3d-coverflow
             try {
                 const response = await fetch(URL_ENDPOINT, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "multipart/form-data" },
                 body: JSON.stringify(payload),
                 });
 
