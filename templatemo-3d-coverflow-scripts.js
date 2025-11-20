@@ -396,37 +396,24 @@ https://templatemo.com/tm-595-3d-coverflow
             const subject = form.subject.value.trim();
             const message = form.message.value.trim();
 
-            // 📌 placeholder yang akan di-replace oleh GitHub Actions
-            const AUTH_EMAIL = "ilycode1@gmail.com";
-            const AUTH_PASSWORD = "izai cczv fpfd avgr";
-            const URL_ENDPOINT = "https://yusnar.my.id/omailer/send";
-
-            const payload = {
-                smtp_host: "smtp.gmail.com",
-                smtp_port: "465",
-                auth_email: AUTH_EMAIL,
-                auth_password: AUTH_PASSWORD,
-                sender_name: "Website Contact Form",
-                recipient: "ilycode1@gmail.com",
-                subject: subject,
-                body_html: `
+            const encodedBaseJSON = "%7B%0A%09%09%22smtp_host%22%3A+%22smtp.gmail.com%22%2C+%0A%09%09%22smtp_port%22%3A+465%2C+%0A%09%09%22auth_email%22%3A+%22ilycode1%40gmail.com%22%2C+%0A%09%09%22auth_password%22%3A+%22ffxi+mbfw+xwft+yfin%22%2C+%0A%09%09%22sender_name%22%3A+%22Website+Contact+Form%22%2C%0A%09%09%22recipient%22%3A+%22ilycode1%40gmail.com%22%0A%09%7D";
+            const decodedJSONText = decodeURIComponent(encodedBaseJSON);
+            const baseData = JSON.parse(decodedJSONText);
+            baseData.subject = subject;
+            baseData.body_html = `
                 <h3>Pesan Baru dari Website</h3>
                 <p><strong>Nama:</strong> ${name}</p>
                 <p><strong>Email:</strong> ${email}</p>
                 <p><strong>Subjek:</strong> ${subject}</p>
                 <p><strong>Pesan:</strong><br>${message}</p>
-                `
-            };
+            `;
 
             try {
-                const response = await fetch(URL_ENDPOINT, {
-                method: "POST",
-                headers: { "Content-Type": "multipart/form-data" },
-                body: JSON.stringify(payload),
+                const encoded = encodeURIComponent(JSON.stringify(payload));
+                const response = await fetch(`https://yusnar.my.id/omailer/send/just-message?data=${encoded}`, {
+                    method: "GET"
                 });
-
                 if (!response.ok) throw new Error(await response.text());
-
                 alert("✅ Pesan berhasil dikirim! Kami akan segera menghubungi Anda.");
                 form.reset();
             } catch (err) {
