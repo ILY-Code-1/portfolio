@@ -392,27 +392,70 @@ https://templatemo.com/tm-595-3d-coverflow
 
             const form = event.target;
             const name = form.name.value.trim();
+            let whatsapp = form.whatsapp.value.trim();
             const email = form.email.value.trim();
             const subject = form.subject.value.trim();
             const message = form.message.value.trim();
 
-            const encodedBaseJSON = "%7B%0A%09%09%22smtp_host%22%3A+%22smtp.gmail.com%22%2C+%0A%09%09%22smtp_port%22%3A+465%2C+%0A%09%09%22auth_email%22%3A+%22ilycode1%40gmail.com%22%2C+%0A%09%09%22auth_password%22%3A+%22ffxi+mbfw+xwft+yfin%22%2C+%0A%09%09%22sender_name%22%3A+%22Website+Contact+Form%22%2C%0A%09%09%22recipient%22%3A+%22ilycode1%40gmail.com%22%0A%09%7D";
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Format email tidak valid.");
+                return;
+            }
+
+            whatsapp = whatsapp.replace(/\D/g, "");
+
+            if (!/^\d+$/.test(whatsapp)) {
+                alert("Nomor WhatsApp hanya boleh angka.");
+                return;
+            }
+
+            if (whatsapp.startsWith("0")) {
+                whatsapp = "62" + whatsapp.slice(1);
+            }
+
+            if (whatsapp.length < 9 || whatsapp.length > 15) {
+                alert("Nomor WhatsApp tidak valid. Pastikan panjangnya 9–15 digit.");
+                return;
+            }
+
+            if (!name || !subject || !message) {
+                alert("Ada kolom yang belum diisi.");
+                return;
+            }
+
+            const encodedBaseJSON = "%7B%0A%09%09%22smtp_host%22%3A%22smtp.gmail.com%22%2C%0A%09%09%22smtp_port%22%3A465%2C%0A%09%09%22auth_email%22%3A%22ilycode1%40gmail.com%22%2C%0A%09%09%22auth_password%22%3A%22ffxi+mbfw+xwft+yfin%22%2C%0A%09%09%22sender_name%22%3A%22Website+Contact+Form%22%2C%0A%09%09%22recipient%22%3A%22ilycode1%40gmail.com%22%0A%09%7D";
             const decodedJSONText = decodeURIComponent(encodedBaseJSON);
             const baseData = JSON.parse(decodedJSONText);
+
+            baseData.auth_password = baseData.auth_password.replace(/\+/g, " ");
+            baseData.sender_name = baseData.sender_name.replace(/\+/g, " ");
             baseData.subject = subject;
             baseData.body_html = `
-                <h3>Pesan Baru dari Website</h3>
-                <p><strong>Nama:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Subjek:</strong> ${subject}</p>
-                <p><strong>Pesan:</strong><br>${message}</p>
+                <!doctype html>
+                <html lang="id">
+                <meta charset="utf-8">
+                <body style="font-family:Arial,sans-serif;margin:16px">
+                <h3>Informasi Kontak Baru dari Web Portfolio!</h3>
+                <p><b>Nama:</b> ${name}<br>
+                    <b>WA:</b> ${whatsapp}<br>
+                    <b>Email:</b> ${email}<br>
+                    <b>Subjek:</b> ${subject}</p>
+
+                <p><b>Pesan:</b><br>${message}</p>
+
+                <p>
+                    <a href="mailto:${email}?subject=Balasan%20untuk%20${subject}">Balas Email</a>
+                    &nbsp;|&nbsp;
+                    <a href="https://wa.me/${whatsapp}">WhatsApp</a>
+                </p>
+                </body>
+                </html>
             `;
 
             try {
-                const encoded = encodeURIComponent(JSON.stringify(payload));
-                const response = await fetch(`https://yusnar.my.id/omailer/send/just-message?data=${encoded}`, {
-                    method: "GET"
-                });
+                const encoded = encodeURIComponent(JSON.stringify(baseData));
+                const response = await fetch(`https://yusnar.my.id/omailer/send/just-message?data=${encoded}`);
                 if (!response.ok) throw new Error(await response.text());
                 alert("✅ Pesan berhasil dikirim! Kami akan segera menghubungi Anda.");
                 form.reset();
