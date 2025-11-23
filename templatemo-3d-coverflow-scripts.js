@@ -70,7 +70,8 @@ https://templatemo.com/tm-595-3d-coverflow
             "https://daarulmukhtarin.my.id/",                 // item 1
             "https://ilhamabdul07.github.io/Flutter-CegahStuntingPuskesmasBojongsari/",         // item 2
             "https://cutideltatekno.my.id/" , // item 3 (kalau ada)
-            "https://github.com/IlhamAbdul07/Flutter-CleanCare/releases/download/v1.4.4-release/app-release.apk"  // item 3 (kalau ada)
+            "https://github.com/IlhamAbdul07/Flutter-CleanCare/releases/download/v1.4.4-release/app-release.apk",
+            "https://tracerstudy.yusnar.my.id/"  // item 3 (kalau ada)
             ];
 
             // Ambil semua coverflow item
