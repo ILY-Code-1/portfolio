@@ -45,37 +45,37 @@ https://templatemo.com/tm-595-3d-coverflow
         const imageData = [
             {
                 title: "SelarasHomeId",
-                description: "ERP Task Management berbasis Website"
+                description: "ERP Task Management berbasis Website (PT. Jangkau Realty Indonesia)"
             },
             {
                 title: "Daarul Mukhtarin",
-                description: "Website Profil Pondok Pesantren Daarul Mukhtarin"
+                description: "Website Profil Pondok Pesantren (Daarul Mukhtarin Al-Falahiyah)"
+            },
+            {
+                title: "Tracer Study",
+                description: "Sistem Tracer Study Alumni berbasis Website (SMK Negeri 3 Pandeglang)"
             },
             {
                 title: "Bojongsari Bebas Stunting",
-                description: "Website Prediksi Stunting dengan Metode Naive Bayes"
+                description: "Website Prediksi Stunting dengan Metode Naive Bayes (Puskesmas Bojongsari Depok)"
             },
             {
                 title: "Pengajuan Cuti Delta Tekno",
-                description: "Sistem Pengajuan Cuti berbasis Website"
+                description: "Sistem Pengajuan Cuti Delta Tekno berbasis Website (PT. Delta Tekno Perkasa)"
             },
             {
                 title: "CleanCare",
                 description: "ERP Monitoring Cleaning Service berbasis Mobile"
             },
-            {
-                title: "Tracer Study",
-                description: "Sistem Tracer Study Alumni berbasis Website"
-            },
         ];
 
         const projectLinks = [
-            "https://selarashome.my.id/",             // item 0
-            "https://daarulmukhtarin.my.id/",                 // item 1
-            "https://ilhamabdul07.github.io/Flutter-CegahStuntingPuskesmasBojongsari/",         // item 2
-            "https://cutideltatekno.my.id/" , // item 3 (kalau ada)
-            "https://github.com/IlhamAbdul07/Flutter-CleanCare/releases/download/v1.4.4-release/app-release.apk",
-            "https://tracerstudy.yusnar.my.id/"  // item 3 (kalau ada)
+                "https://selarashome.my.id/",
+                "https://daarulmukhtarin.my.id/",
+                "https://tracerstudy.yusnar.my.id/",
+                "https://ilhamabdul07.github.io/Flutter-CegahStuntingPuskesmasBojongsari/",
+                "https://cutideltatekno.my.id/" ,
+                "https://github.com/IlhamAbdul07/Flutter-CleanCare/releases/download/v1.4.4-release/app-release.apk",
             ];
 
             // Ambil semua coverflow item
