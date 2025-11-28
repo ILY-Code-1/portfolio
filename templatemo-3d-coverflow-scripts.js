@@ -63,6 +63,10 @@ https://templatemo.com/tm-595-3d-coverflow
                 title: "CleanCare",
                 description: "ERP Monitoring Cleaning Service berbasis Mobile"
             },
+            {
+                title: "Tracer Study",
+                description: "Sistem Tracer Study Alumni berbasis Website"
+            },
         ];
 
         const projectLinks = [
