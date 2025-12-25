@@ -395,6 +395,12 @@ https://templatemo.com/tm-595-3d-coverflow
         async function handleSubmit(event) {
             event.preventDefault();
 
+            const submitBtn = document.getElementById("submitBtn");
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+            submitBtn.style.cursor = "not-allowed";
+
             const form = event.target;
             const name = form.name.value.trim();
             let whatsapp = form.whatsapp.value.trim();
@@ -429,7 +435,7 @@ https://templatemo.com/tm-595-3d-coverflow
                 return;
             }
 
-            const encodedBaseJSON = "%7B%0A%09%09%22smtp_host%22%3A%22smtp.gmail.com%22%2C%0A%09%09%22smtp_port%22%3A465%2C%0A%09%09%22auth_email%22%3A%22ilycode1%40gmail.com%22%2C%0A%09%09%22auth_password%22%3A%22ffxi+mbfw+xwft+yfin%22%2C%0A%09%09%22sender_name%22%3A%22Website+Contact+Form%22%2C%0A%09%09%22recipient%22%3A%22ilycode1%40gmail.com%22%0A%09%7D";
+            const encodedBaseJSON = "%7B%0A%09%09%22smtp_host%22%3A%22smtp.gmail.com%22%2C%0A%09%09%22smtp_port%22%3A587%2C%0A%09%09%22auth_email%22%3A%22ilycode1%40gmail.com%22%2C%0A%09%09%22auth_password%22%3A%22xmmr+swyv+zbej+wckn%22%2C%0A%09%09%22sender_name%22%3A%22Website+Contact+Form%22%2C%0A%09%09%22recipient%22%3A%22ilycode1%40gmail.com%22%0A%09%7D";
             const decodedJSONText = decodeURIComponent(encodedBaseJSON);
             const baseData = JSON.parse(decodedJSONText);
 
@@ -463,9 +469,15 @@ https://templatemo.com/tm-595-3d-coverflow
                 const response = await fetch(`https://yusnar.my.id/omailer/send/just-message?data=${encoded}`);
                 if (!response.ok) throw new Error(await response.text());
                 alert("✅ Pesan berhasil dikirim! Kami akan segera menghubungi Anda.");
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Send Message";
+                submitBtn.style.cursor = "pointer";
                 form.reset();
             } catch (err) {
                 console.error(err);
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Send Message";
+                submitBtn.style.cursor = "pointer";
                 alert("❌ Gagal mengirim pesan. Silakan coba lagi nanti.");
             }
         }
